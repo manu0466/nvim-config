@@ -41,11 +41,22 @@ return {
     end,
     keys = {
         { "<A-Left>",    "<cmd>BufferLineCyclePrev<cr>", desc = "BufferLine go to previous" },
-        { "<A-l>",       "<cmd>BufferLineCyclePrev<cr>", desc = "BufferLine go to previous" },
+        { "<A-h>",       "<cmd>BufferLineCyclePrev<cr>", desc = "BufferLine go to previous" },
         { "<A-Right>",   "<cmd>BufferLineCycleNext<cr>", desc = "BufferLine go to next" },
-        { "<A-h>",       "<cmd>BufferLineCycleNext<cr>", desc = "BufferLine go to next" },
+        { "<A-l>",       "<cmd>BufferLineCycleNext<cr>", desc = "BufferLine go to next" },
         { "<S-A-Left>",  "<cmd>BufferLineMovePrev<cr>",  desc = "BufferLine move to previous" },
         { "<S-A-Right>", "<cmd>BufferLineMoveNext<cr>",  desc = "BufferLine move to next" },
-        { "<A-x>",       "<cmd>bdelete<cr>",             desc = "Close buffer" },
+        {
+            "<A-x>",
+            function()
+                -- Save the current buffer number
+                local current_buffer = vim.fn.bufnr('%')
+                -- Move to the previous buffer
+                vim.cmd('BufferLineMovePrev')
+                -- Close the previous buffer
+                vim.cmd("bd " .. current_buffer)
+            end,
+            desc = "Close buffer"
+        },
     }
 }
