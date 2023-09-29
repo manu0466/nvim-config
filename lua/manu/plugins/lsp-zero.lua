@@ -50,43 +50,58 @@ return {
         })
 
         lsp.on_attach(function(_, bufnr)
-            local opts = function (desc)
-               return { buffer = bufnr, remap = false, desc = desc }
+            local opts = function(desc)
+                return { buffer = bufnr, remap = false, desc = desc }
             end
 
             vim.keymap.set("n", "gd", function()
                 require("telescope.builtin").lsp_definitions()
             end, opts("LSP: go to definition"))
+
             vim.keymap.set("n", "K", function()
                 vim.lsp.buf.hover()
             end, opts("LSP: Hover"))
-            vim.keymap.set("n", "<leader>vws", function()
+
+            vim.keymap.set("n", "<leader>ws", function()
                 require("telescope.builtin").lsp_dynamic_workspace_symbols()
             end, opts("LSP: Workspace Symbols"))
-            vim.keymap.set("n", "<leader>vd", function()
+
+            vim.keymap.set("n", "<leader>cD", function()
                 vim.diagnostic.open_float()
             end, opts("LSP: Show Diagnostics"))
+
             vim.keymap.set("n", "[d", function()
                 vim.diagnostic.goto_next()
             end, opts("LSP: Next Diagnostic"))
+
             vim.keymap.set("n", "]d", function()
                 vim.diagnostic.goto_prev()
             end, opts("LSP: Prev Diagnostic"))
+
             vim.keymap.set("n", "<a-cr>", function()
                 vim.cmd("CodeActionMenu")
             end, opts("LSP: Code Actions"))
-            vim.keymap.set("n", "<leader>vrr", function()
+
+            vim.keymap.set("n", "<leader>crr", function()
                 require("telescope.builtin").lsp_references()
             end, opts("LSP: References"))
-            vim.keymap.set("n", "<leader>vrn", function()
+
+            vim.keymap.set("n", "<leader>crn", function()
                 vim.lsp.buf.rename()
             end, opts("LSP: Rename"))
-            vim.keymap.set("n", "<leader>vri", function()
+
+            vim.keymap.set("n", "<leader>cic", function()
                 require("telescope.builtin").lsp_incoming_calls()
             end, opts("LSP: Incoming Calls"))
+
+            vim.keymap.set("n", "<leader>coc", function()
+                require("telescope.builtin").lsp_outgoing_calls()
+            end, opts("LSP: Outgoing Calls"))
+
             vim.keymap.set("i", "<C-h>", function()
                 vim.lsp.buf.signature_help()
             end, opts("LSP: Signature Help"))
+
             vim.keymap.set("n", "<leader>fm", function()
                 vim.lsp.buf.format()
             end, opts("LSP: Format"))
