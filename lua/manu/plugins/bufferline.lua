@@ -52,7 +52,7 @@ return {
                 -- Save the current buffer number
                 local current_buffer = vim.fn.bufnr('%')
                 -- Move to the previous buffer
-                vim.cmd('BufferLineMovePrev')
+                vim.cmd('BufferLineCyclePrev')
                 -- Close the previous buffer
                 vim.cmd("bd " .. current_buffer)
             end,
