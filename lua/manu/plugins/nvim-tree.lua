@@ -33,7 +33,6 @@ return {
                 centralize_selection = false,
                 cursorline = true,
                 debounce_delay = 15,
-                hide_root_folder = false,
                 side = "left",
                 preserve_window_proportions = false,
                 number = false,
@@ -42,7 +41,6 @@ return {
                 width = {
                     min = 30,
                     max = -1,
-                    padding = 1,
                 },
                 float = {
                     enable = false,
