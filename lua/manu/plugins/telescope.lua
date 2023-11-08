@@ -77,6 +77,6 @@ return {
         { "<leader>fg", "<cmd>Telescope git_files<cr>",  desc = "Find file in git repo" },
         { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file" },
         { "<leader>fw", "<cmd>Telescope live_grep<cr>",  desc = "Live grep find" },
-        { "<leader>fm", "<cmd>Telescope media_files<cr>",  desc = "Live grep find" },
+        { "<leader>fm", "<cmd>Telescope media_files<cr>",  desc = "Find media files" },
     },
 }
