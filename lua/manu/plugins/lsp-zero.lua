@@ -27,6 +27,7 @@ return {
         lsp.ensure_installed({
             "tsserver",
             "rust_analyzer",
+            "gopls",
         })
 
         -- Disable highlight since we use treesitter
