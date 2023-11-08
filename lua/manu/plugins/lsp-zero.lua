@@ -102,7 +102,7 @@ return {
                 vim.lsp.buf.signature_help()
             end, opts("LSP: Signature Help"))
 
-            vim.keymap.set("n", "<leader>fm", function()
+            vim.keymap.set("n", "<leader>tf", function()
                 vim.lsp.buf.format()
             end, opts("LSP: Format"))
         end)
