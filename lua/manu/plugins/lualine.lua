@@ -5,7 +5,6 @@ return {
     },
     event = "VeryLazy",
     config = function()
-
         local lualine = require("lualine")
         lualine.setup({
             options = {
@@ -29,7 +28,7 @@ return {
             sections = {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
-                lualine_c = { 'filename' },
+                lualine_c = { 'filename', require("package-info").get_status },
                 lualine_x = { "" },
                 lualine_y = { 'filetype', 'encoding', 'fileformat' },
                 lualine_z = { 'location' }
