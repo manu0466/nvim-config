@@ -1,5 +1,5 @@
 return {
-	"Exafunction/codeium.vim",
-	config = function() end,
-	event = "BufEnter",
+    "Exafunction/codeium.vim",
+    config = function() end,
+    event = "BufEnter",
 }

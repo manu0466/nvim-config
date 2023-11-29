@@ -1,7 +1,7 @@
 return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.3",
-    dependencies = { 
+    dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-media-files.nvim",
         "nvim-lua/popup.nvim"
@@ -64,19 +64,18 @@ return {
                 media_files = {
                     -- filetypes whitelist
                     -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-                    filetypes = {"png", "webp", "jpg", "jpeg"},
+                    filetypes = { "png", "webp", "jpg", "jpeg" },
                     -- find command (defaults to `fd`)
                     find_cmd = "rg"
                 }
             },
         })
         telescope.load_extension("media_files")
-
     end,
     keys = {
-        { "<leader>fg", "<cmd>Telescope git_files<cr>",  desc = "Find file in git repo" },
-        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file" },
-        { "<leader>fw", "<cmd>Telescope live_grep<cr>",  desc = "Live grep find" },
-        { "<leader>fm", "<cmd>Telescope media_files<cr>",  desc = "Find media files" },
+        { "<leader>fg", "<cmd>Telescope git_files<cr>",   desc = "Find file in git repo" },
+        { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find file" },
+        { "<leader>fw", "<cmd>Telescope live_grep<cr>",   desc = "Live grep find" },
+        { "<leader>fm", "<cmd>Telescope media_files<cr>", desc = "Find media files" },
     },
 }

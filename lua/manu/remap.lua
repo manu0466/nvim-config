@@ -33,4 +33,4 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Editor actions
 vim.keymap.set("n", "<leader>ctR", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Replace all occurrences" })
+    { desc = "Replace all occurrences" })
