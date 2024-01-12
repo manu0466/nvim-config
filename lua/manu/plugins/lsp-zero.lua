@@ -23,6 +23,8 @@ return {
     },
     config = function()
         local lsp = require("lsp-zero")
+        local formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
         lsp.preset("minimal")
         lsp.ensure_installed({
             "tsserver",
@@ -50,9 +52,21 @@ return {
             },
         })
 
-        lsp.on_attach(function(_, bufnr)
+        lsp.on_attach(function(client, bufnr)
             local opts = function(desc)
                 return { buffer = bufnr, remap = false, desc = desc }
+            end
+
+            -- Auto format on save
+            if client.supports_method("textDocument/formatting") then
+                vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    group = formatting_augroup,
+                    buffer = bufnr,
+                    callback = function()
+                        vim.lsp.buf.format({ async = false })
+                    end,
+                })
             end
 
             vim.keymap.set("n", "gd", function()
@@ -111,11 +125,9 @@ return {
         local lspconfig = require("lspconfig")
 
         -- Configure lua language server for neovim
-
         lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
         -- eslint
-
         lspconfig.eslint.setup({
             settings = {
                 codeAction = {
@@ -151,7 +163,9 @@ return {
                 },
             },
             on_attach = function(_, bufnr)
+                vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
                 vim.api.nvim_create_autocmd("BufWritePre", {
+                    group = formatting_augroup,
                     buffer = bufnr,
                     callback = function()
                         vim.cmd("EslintFixAll")
@@ -161,7 +175,6 @@ return {
         })
 
         -- rust analyzer
-
         lspconfig.rust_analyzer.setup({
             -- Server-specific settings. See `:help lspconfig-setup`
             settings = {
@@ -183,22 +196,10 @@ return {
                     }
                 },
             },
-            on_attach = function(_, bufnr)
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    buffer = bufnr,
-                    pattern = "*.rs",
-                    callback = function()
-                        -- Format on save
-                        vim.lsp.buf.format()
-                    end
-                })
-            end
         })
 
         -- gopls
-
         local util = require "lspconfig/util"
-
         lspconfig.gopls.setup({
             cmd = { "gopls", "serve" },
             filetypes = { "go", "gomod" },
@@ -212,7 +213,9 @@ return {
                 },
             },
             on_attach = function(_, bufnr)
+                vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
                 vim.api.nvim_create_autocmd('BufWritePre', {
+                    group = formatting_augroup,
                     buffer = bufnr,
                     pattern = '*.go',
                     callback = function()
@@ -221,7 +224,6 @@ return {
                 })
             end
         })
-
 
         lsp.setup()
 
@@ -234,6 +236,7 @@ return {
             ["<C-e>"] = cmp.mapping.abort(),
             ["<C-Space>"] = cmp.mapping.complete(),
         }
+
         -- snippets
         require("luasnip.loaders.from_vscode").lazy_load()
 
