@@ -127,6 +127,14 @@ return {
         -- Configure lua language server for neovim
         lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
+        -- tsserver
+        lspconfig.tsserver.setup({
+            on_attach = function(_, bufnr)
+                -- For tsserver we don't want the format on save.
+                vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
+            end
+        })
+
         -- eslint
         lspconfig.eslint.setup({
             settings = {
