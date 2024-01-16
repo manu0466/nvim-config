@@ -93,10 +93,6 @@ return {
                 vim.diagnostic.goto_prev()
             end, opts("LSP: Prev Diagnostic"))
 
-            vim.keymap.set("n", "<a-cr>", function()
-                vim.cmd("CodeActionMenu")
-            end, opts("LSP: Code Actions"))
-
             vim.keymap.set("n", "<leader>crr", function()
                 require("telescope.builtin").lsp_references()
             end, opts("LSP: References"))
