@@ -1,51 +1,54 @@
 -- Plugin to display the LSP server informations
 return {
     "j-hui/fidget.nvim",
-    tag = "legacy",
-    event = "LspAttach",
+    tag = "v1.2.0",
+    event = "VeryLazy",
     opts = {
-        text = {
-            spinner = "meter", -- animation shown when tasks are ongoing
-            done = "✔", -- character shown when all tasks are complete
-            commenced = "Started", -- message shown when task starts
-            completed = "Completed", -- message shown when task completes
-        },
-        align = {
-            bottom = true, -- align fidgets along bottom edge of buffer
-            right = true, -- align fidgets along right edge of buffer
-        },
-        timer = {
-            spinner_rate = 125, -- frame rate of spinner animation, in ms
-            fidget_decay = 2000, -- how long to keep around empty fidget, in ms
-            task_decay = 1000, -- how long to keep around completed task, in ms
-        },
-        window = {
-            relative = "win", -- where to anchor, either "win" or "editor"
-            blend = 100, -- &winblend for the window
-            zindex = nil, -- the zindex value for the window
-            border = "none", -- style of border for the fidget window
-        },
-        fmt = {
-            leftpad = true, -- right-justify text in fidget box
-            stack_upwards = true, -- list of tasks grows upwards
-            max_width = 0, -- maximum width of the fidget box
-            fidget =     -- function to format fidget title
-                function(fidget_name, spinner)
-                    return string.format("%s %s", spinner, fidget_name)
+        -- Options related to LSP progress subsystem
+        progress = {
+            poll_rate = 0,                -- How and when to poll for progress messages
+            suppress_on_insert = false,   -- Suppress new messages while in insert mode
+            ignore_done_already = false,  -- Ignore new tasks that are already complete
+            ignore_empty_message = false, -- Ignore new tasks that don't contain a message
+            clear_on_detach =             -- Clear notification group when LSP server detaches
+                function(client_id)
+                    local client = vim.lsp.get_client_by_id(client_id)
+                    return client and client.name or nil
                 end,
-            task = -- function to format each task line
-                function(task_name, message, percentage)
-                    return string.format(
-                        "%s%s [%s]",
-                        message,
-                        percentage and string.format(" (%s%%)", percentage) or "",
-                        task_name
-                    )
-                end,
+            notification_group = -- How to get a progress message's notification group key
+                function(msg) return msg.lsp_client.name end,
+            ignore = {},         -- List of LSP servers to ignore
+
+            -- Options related to how LSP progress messages are displayed as notifications
+            display = {
+                render_limit = 16, -- How many LSP messages to show at once
+                done_ttl = 1, -- How long a message should persist after completion
+                done_icon = "✔", -- Icon shown when all LSP progress tasks are complete
+                done_style = "Constant", -- Highlight group for completed LSP tasks
+                progress_ttl = math.huge, -- How long a message should persist when in progress
+                progress_icon = { pattern = "meter", period = 1 },
+                progress_style = "WarningMsg",
+                group_style = "Title",   -- Highlight group for group name (LSP server name)
+                icon_style = "Question", -- Highlight group for group icons
+                priority = 30,           -- Ordering priority for LSP notification group
+                skip_history = true,     -- Whether progress notifications should be omitted from history
+                format_annote =          -- How to format a progress annotation
+                    function(msg) return msg.title end,
+                format_group_name =      -- How to format a progress notification group's name
+                    function(group) return tostring(group) end,
+            },
+
+            -- Options related to Neovim's built-in LSP client
+            lsp = {
+                progress_ringbuf_size = 0, -- Configure the nvim's LSP progress ring buffer size
+            },
         },
-        debug = {
-            logging = false, -- whether to enable logging, for debugging
-            strict = false, -- whether to interpret LSP strictly
+
+        -- Options related to integrating with other plugins
+        integration = {
+            ["nvim-tree"] = {
+                enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
+            },
         },
     },
 }
