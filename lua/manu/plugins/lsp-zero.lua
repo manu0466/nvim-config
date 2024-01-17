@@ -84,7 +84,6 @@ return {
         },
         config = function()
             local lsp_zero = require("lsp-zero")
-            local formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
             -- Disable highlight since we use treesitter
             lsp_zero.set_server_config({
@@ -100,13 +99,9 @@ return {
                 info = "I",
             })
 
-
-            lsp_zero.on_attach(function(client, bufnr)
-                local opts = function(desc)
-                    return { buffer = bufnr, remap = false, desc = desc }
-                end
-
-                -- Auto format on save
+            -- Auto format on save
+            local formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+            local init_format_on_save = function(client, bufnr)
                 if client.supports_method("textDocument/formatting") then
                     vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
                     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -117,7 +112,12 @@ return {
                         end,
                     })
                 end
+            end
 
+            lsp_zero.on_attach(function(_, bufnr)
+                local opts = function(desc)
+                    return { buffer = bufnr, remap = false, desc = desc }
+                end
                 vim.keymap.set("n", "gd", function()
                     require("telescope.builtin").lsp_definitions()
                 end, opts("LSP: go to definition"))
@@ -176,15 +176,18 @@ return {
                     lsp_zero.default_setup,
                     lua_ls = function()
                         local lua_opts = lsp_zero.nvim_lua_ls()
+                        local original_on_attach = lua_opts.on_attach
+                        lua_opts.on_attach = function(client, bufnr)
+                            init_format_on_save(client, bufnr)
+                            if original_on_attach then
+                                original_on_attach(client, bufnr)
+                            end
+                        end
+
                         lspconfig.lua_ls.setup(lua_opts)
                     end,
                     tsserver = function()
-                        lspconfig.tsserver.setup({
-                            on_attach = function(_, bufnr)
-                                -- For tsserver we don't want the format on save.
-                                vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
-                            end
-                        })
+                        lspconfig.tsserver.setup({})
                     end,
                     eslint = function()
                         lspconfig.eslint.setup({
@@ -255,6 +258,9 @@ return {
                                     }
                                 },
                             },
+                            on_attach = function(client, bufnr)
+                                init_format_on_save(client, bufnr)
+                            end,
                         })
                     end,
                     gopls = function()
