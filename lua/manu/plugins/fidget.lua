@@ -1,4 +1,4 @@
--- Plugin to display the LSP server informations
+-- Plugin to display the LSP server information
 return {
     "j-hui/fidget.nvim",
     tag = "v1.2.0",

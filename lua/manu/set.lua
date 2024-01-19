@@ -1,4 +1,4 @@
--- netrw disbale for nvim-tree
+-- netrw disable for nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -6,7 +6,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
--- Code identation config
+-- Code indentation config
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4

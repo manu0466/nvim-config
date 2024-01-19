@@ -16,7 +16,7 @@ return {
         config = true,
     },
 
-    -- Autocompletion
+    -- Auto completion
     {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
@@ -33,7 +33,6 @@ return {
             },
         },
         config = function()
-            -- Here is where you configure the autocompletion settings.
             local lsp_zero = require('lsp-zero')
             lsp_zero.extend_cmp()
 
@@ -242,11 +241,11 @@ return {
                             settings = {
                                 ['rust-analyzer'] = {
                                     cargo = {
-                                        -- Run the anlyzer with all the features
+                                        -- Run the analyzer with all the features
                                         -- features = { "all" },
                                     },
                                     check = {
-                                        -- Use carco clippy to check the code instead of
+                                        -- Use cargo clippy to check the code instead of
                                         -- cargo check
                                         overrideCommand = {
                                             "cargo",

@@ -10,11 +10,11 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<cr>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
--- Move between search result keping the cursor centered
+-- Move between search result keeping the cursor centered
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Window movment
+-- Window movement
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
