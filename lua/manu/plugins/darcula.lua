@@ -8,6 +8,7 @@ return {
 
         -- Some fix for the theme.
         -- You can use TSHighlightCapturesUnderCursor to find the tag.
+        vim.api.nvim_set_hl(0, "SpellBad", { undercurl = true, sp = "#659C6B" })
         vim.api.nvim_set_hl(0, "Todo", { fg = "#A8C023" })
         vim.api.nvim_set_hl(0, "@comment.documentation", { fg = "#629755" })
         vim.api.nvim_set_hl(0, "@include", { fg = "#CC7832" })
