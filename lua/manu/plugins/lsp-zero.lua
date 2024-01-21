@@ -31,6 +31,7 @@ return {
                 build = "make install_jsregexp",
                 dependencies = "rafamadriz/friendly-snippets",
             },
+            { "f3fora/cmp-spell" },
         },
         config = function()
             local lsp_zero = require('lsp-zero')
@@ -61,6 +62,15 @@ return {
                     { name = "buffer" },
                     { name = "path" },
                     { name = "luasnip" },
+                    {
+                        name = 'spell',
+                        option = {
+                            keep_all_entries = false,
+                            enable_in_context = function()
+                                return require('cmp.config.context').in_treesitter_capture('spell')
+                            end,
+                        },
+                    },
                 },
                 snippet = {
                     expand = function(args)
