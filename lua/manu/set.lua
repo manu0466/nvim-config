@@ -33,3 +33,4 @@ vim.o.foldenable = true
 -- Spellcheck
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
+vim.opt.spelloptions = 'camel'
