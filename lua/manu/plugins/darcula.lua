@@ -15,8 +15,9 @@ return {
         vim.api.nvim_set_hl(0, "Boolean", { fg = "#CC7832" })
         vim.api.nvim_set_hl(0, "@label", { fg = "#9876AA" })
 
-        vim.api.nvim_set_hl(0, "@tag", { fg = "#26BDA4" })
-        vim.api.nvim_set_hl(0, "@constructor", { fg = "#26BDA4" })
+        vim.api.nvim_set_hl(0, "@tag.tsx", { fg = "#26BDA4" })
+        vim.api.nvim_set_hl(0, "@constructor.tsx", { fg = "#26BDA4" })
+        vim.api.nvim_set_hl(0, "@constructor", { fg = "#CC7832" })
         vim.api.nvim_set_hl(0, "@tag.delimiter", { fg = "#E8BF6A" })
         vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = "#B9BCD1" })
         vim.api.nvim_set_hl(0, "@operator", { fg = "#B9BCD1" })
