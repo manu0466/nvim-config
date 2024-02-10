@@ -171,9 +171,9 @@ return {
                     vim.lsp.buf.signature_help()
                 end, opts("LSP: Signature Help"))
 
-                vim.keymap.set("n", "<leader>tf", function()
+                vim.keymap.set("n", "<leader>ft", function()
                     vim.lsp.buf.format()
-                end, opts("LSP: Format"))
+                end, opts("LSP: Format Text"))
             end)
 
             -- Automatic language server config
