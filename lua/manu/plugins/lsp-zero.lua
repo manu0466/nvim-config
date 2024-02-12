@@ -299,6 +299,9 @@ return {
                             end
                         })
                     end,
+                    bashls = function()
+                        lspconfig.bashls.setup({})
+                    end
                 }
             })
 
