@@ -25,3 +25,6 @@ popup
 param
 userNumber
 unsynced
+Struct
+serializable
+getter
