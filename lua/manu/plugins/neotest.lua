@@ -6,7 +6,8 @@ return {
         "nvim-treesitter/nvim-treesitter",
 
         -- Test runners
-        "nvim-neotest/neotest-jest"
+        "nvim-neotest/neotest-jest",
+        "rouge8/neotest-rust"
     },
     config = function()
         require('neotest').setup({
@@ -31,6 +32,8 @@ return {
                         return vim.fn.getcwd()
                     end
                 }),
+                -- Rust adapter
+                require("neotest-rust"),
             }
         })
     end,
