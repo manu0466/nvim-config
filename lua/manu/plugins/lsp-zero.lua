@@ -90,6 +90,11 @@ return {
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'williamboman/mason-lspconfig.nvim' },
+            {
+                'yuchanns/shfmt.nvim',
+                opts = { "-i=4" },
+                lazy = true
+            },
         },
         config = function()
             local lsp_zero = require("lsp-zero")
@@ -120,13 +125,23 @@ return {
                             vim.lsp.buf.format({ async = false })
                         end,
                     })
+                elseif client.name == "bashls" then
+                    vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        group = formatting_augroup,
+                        buffer = bufnr,
+                        callback = function()
+                            require("shfmt").formatting()
+                        end,
+                    })
                 end
             end
 
-            lsp_zero.on_attach(function(_, bufnr)
+            lsp_zero.on_attach(function(client, bufnr)
                 local opts = function(desc)
                     return { buffer = bufnr, remap = false, desc = desc }
                 end
+
                 vim.keymap.set("n", "gd", function()
                     require("telescope.builtin").lsp_definitions()
                 end, opts("LSP: go to definition"))
@@ -172,7 +187,11 @@ return {
                 end, opts("LSP: Signature Help"))
 
                 vim.keymap.set("n", "<leader>ft", function()
-                    vim.lsp.buf.format()
+                    if client.name == 'bashls' then
+                        require("shfmt").formatting()
+                    else
+                        vim.lsp.buf.format()
+                    end
                 end, opts("LSP: Format Text"))
             end)
 
@@ -300,7 +319,11 @@ return {
                         })
                     end,
                     bashls = function()
-                        lspconfig.bashls.setup({})
+                        lspconfig.bashls.setup({
+                            on_attach = function(client, bufnr)
+                                init_format_on_save(client, bufnr)
+                            end,
+                        })
                     end
                 }
             })
