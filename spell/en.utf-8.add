@@ -28,3 +28,5 @@ unsynced
 Struct
 serializable
 getter
+Reinitialization
+deauthenticated
