@@ -150,11 +150,11 @@ return {
                     vim.lsp.buf.hover()
                 end, opts("LSP: Hover"))
 
-                vim.keymap.set("n", "<leader>ws", function()
+                vim.keymap.set("n", "<leader>lws", function()
                     require("telescope.builtin").lsp_dynamic_workspace_symbols()
                 end, opts("LSP: Workspace Symbols"))
 
-                vim.keymap.set("n", "<leader>cD", function()
+                vim.keymap.set("n", "<leader>ld", function()
                     vim.diagnostic.open_float()
                 end, opts("LSP: Show Diagnostics"))
 
@@ -166,21 +166,25 @@ return {
                     vim.diagnostic.goto_prev()
                 end, opts("LSP: Prev Diagnostic"))
 
-                vim.keymap.set("n", "<leader>crr", function()
+                vim.keymap.set("n", "<leader>lrr", function()
                     require("telescope.builtin").lsp_references()
                 end, opts("LSP: References"))
 
-                vim.keymap.set("n", "<leader>crn", function()
+                vim.keymap.set("n", "<leader>lrn", function()
                     vim.lsp.buf.rename()
                 end, opts("LSP: Rename"))
 
-                vim.keymap.set("n", "<leader>cic", function()
+                vim.keymap.set("n", "<leader>lci", function()
                     require("telescope.builtin").lsp_incoming_calls()
-                end, opts("LSP: Incoming Calls"))
+                end, opts("LSP: Calls Incoming"))
 
-                vim.keymap.set("n", "<leader>coc", function()
+                vim.keymap.set("n", "<leader>lco", function()
                     require("telescope.builtin").lsp_outgoing_calls()
-                end, opts("LSP: Outgoing Calls"))
+                end, opts("LSP: Calls Outgoing"))
+
+                vim.keymap.set("n", "<leader>li", function()
+                    require("telescope.builtin").lsp_implementations()
+                end, opts("LSP: Show implementations"))
 
                 vim.keymap.set("i", "<C-h>", function()
                     vim.lsp.buf.signature_help()
