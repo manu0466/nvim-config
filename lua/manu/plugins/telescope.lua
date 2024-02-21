@@ -73,8 +73,15 @@ return {
         telescope.load_extension("media_files")
     end,
     keys = {
-        { "<leader>fg", "<cmd>Telescope git_files<cr>",   desc = "Find file in git repo" },
-        { "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find file" },
+        { "<leader>fg", "<cmd>Telescope git_files<cr>",  desc = "Find file in git repo" },
+        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file" },
+        {
+            "<leader>fb",
+            function()
+                require("telescope.builtin").current_buffer_fuzzy_find()
+            end,
+            desc = "Fuzy find in current buffer",
+        },
         { "<leader>fw", "<cmd>Telescope live_grep<cr>",   desc = "Live grep find" },
         { "<leader>fm", "<cmd>Telescope media_files<cr>", desc = "Find media files" },
     },
