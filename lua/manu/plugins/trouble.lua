@@ -8,6 +8,6 @@ return {
     },
     cmd = "TroubleToggle",
     keys = {
-        { "<leader>d", "<cmd>TroubleToggle<cr>", desc = "Open trouble window" },
+        { "<leader>vD", "<cmd>TroubleToggle<cr>", desc = "Diagnostic Summary" },
     }
 }

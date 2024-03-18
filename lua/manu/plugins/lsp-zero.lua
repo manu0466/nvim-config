@@ -154,7 +154,7 @@ return {
                     require("telescope.builtin").lsp_dynamic_workspace_symbols()
                 end, opts("LSP: Workspace Symbols"))
 
-                vim.keymap.set("n", "<leader>ld", function()
+                vim.keymap.set("n", "<leader>vd", function()
                     vim.diagnostic.open_float()
                 end, opts("LSP: Show Diagnostics"))
 
@@ -166,23 +166,23 @@ return {
                     vim.diagnostic.goto_prev()
                 end, opts("LSP: Prev Diagnostic"))
 
-                vim.keymap.set("n", "<leader>lrr", function()
+                vim.keymap.set("n", "<leader>vrr", function()
                     require("telescope.builtin").lsp_references()
                 end, opts("LSP: References"))
 
-                vim.keymap.set("n", "<leader>lrn", function()
+                vim.keymap.set("n", "<leader>vrn", function()
                     vim.lsp.buf.rename()
                 end, opts("LSP: Rename"))
 
-                vim.keymap.set("n", "<leader>lci", function()
+                vim.keymap.set("n", "<leader>vci", function()
                     require("telescope.builtin").lsp_incoming_calls()
                 end, opts("LSP: Calls Incoming"))
 
-                vim.keymap.set("n", "<leader>lco", function()
+                vim.keymap.set("n", "<leader>vco", function()
                     require("telescope.builtin").lsp_outgoing_calls()
                 end, opts("LSP: Calls Outgoing"))
 
-                vim.keymap.set("n", "<leader>li", function()
+                vim.keymap.set("n", "<leader>vi", function()
                     require("telescope.builtin").lsp_implementations()
                 end, opts("LSP: Show implementations"))
 
