@@ -1,6 +1,6 @@
 local function get_bin_path(bin)
     local output = vim.fn.system(('whereis %s | cut -d " " -f 2'):format(bin))
-    local bin_path, _number = string.gsub(output, "\n", "")
+    local bin_path, _ = string.gsub(output, "\n", "")
     return bin_path
 end
 
