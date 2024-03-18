@@ -33,7 +33,9 @@ return {
                     end
                 }),
                 -- Rust adapter
-                require("neotest-rust"),
+                require("neotest-rust") {
+                    dap_adapter = "lldb",
+                },
             }
         })
     end,
