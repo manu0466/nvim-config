@@ -18,7 +18,7 @@ return {
     },
     keys = {
         {
-            "<a-cr>",
+            "<C-Space>",
             function() require("actions-preview").code_actions() end,
             mode = "n",
             desc = "Show code actions"
