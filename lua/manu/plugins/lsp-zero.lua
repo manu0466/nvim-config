@@ -158,11 +158,11 @@ return {
                     vim.diagnostic.open_float()
                 end, opts("LSP: Show Diagnostics"))
 
-                vim.keymap.set("n", "[d", function()
+                vim.keymap.set("n", "]d", function()
                     vim.diagnostic.goto_next()
                 end, opts("LSP: Next Diagnostic"))
 
-                vim.keymap.set("n", "]d", function()
+                vim.keymap.set("n", "[d", function()
                     vim.diagnostic.goto_prev()
                 end, opts("LSP: Prev Diagnostic"))
 
