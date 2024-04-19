@@ -309,8 +309,9 @@ return {
                                     staticcheck = true,
                                 },
                             },
-                            on_attach = function(_, bufnr)
+                            on_attach = function(client, bufnr)
                                 vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
+                                init_format_on_save(client, bufnr)
                                 vim.api.nvim_create_autocmd('BufWritePre', {
                                     group = formatting_augroup,
                                     buffer = bufnr,
