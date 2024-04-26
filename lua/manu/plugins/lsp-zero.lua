@@ -77,7 +77,8 @@ return {
                         require('luasnip').lsp_expand(args.body)
                     end,
                 },
-                mapping = cmp_mappings
+                mapping = cmp_mappings,
+                preselect = cmp.PreselectMode.None,
             })
         end
     },
@@ -329,7 +330,7 @@ return {
                                 init_format_on_save(client, bufnr)
                             end,
                         })
-                    end
+                    end,
                 }
             })
 
