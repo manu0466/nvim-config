@@ -17,7 +17,7 @@ return {
             end,
         })
     end,
-    config = function(_, o)
+    config = function(_, _)
         require('gitsigns').setup({
             on_attach = function(bufnr)
                 local gs = require('gitsigns')
@@ -29,17 +29,17 @@ return {
                 end
 
                 -- Navigation
-                map('n', ']c', function()
-                    if vim.wo.diff then return ']c' end
+                map('n', ']h', function()
+                    if vim.wo.diff then return ']h' end
                     vim.schedule(function() gs.next_hunk() end)
                     return '<Ignore>'
-                end, { expr = true })
+                end, { expr = true, desc = "Go to next hunk" })
 
-                map('n', '[c', function()
-                    if vim.wo.diff then return '[c' end
+                map('n', '[]', function()
+                    if vim.wo.diff then return '[h' end
                     vim.schedule(function() gs.prev_hunk() end)
                     return '<Ignore>'
-                end, { expr = true })
+                end, { expr = true, desc = "Go to prev hunk" })
 
                 -- Actions
                 map('n', '<leader>hs', gs.stage_hunk, { desc = "Stage hunk" })
