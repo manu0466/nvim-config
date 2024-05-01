@@ -151,7 +151,7 @@ return {
                     vim.lsp.buf.hover()
                 end, opts("LSP: Hover"))
 
-                vim.keymap.set("n", "<leader>lws", function()
+                vim.keymap.set("n", "<leader>fs", function()
                     require("telescope.builtin").lsp_dynamic_workspace_symbols()
                 end, opts("LSP: Workspace Symbols"))
 
