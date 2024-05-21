@@ -23,7 +23,7 @@ vim.opt.updatetime = 50
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 12
 vim.opt.colorcolumn = "80"
-vim.opt.listchars = "eol:↵,space:·,tab:»·,trail:·,extends:→,precedes:←,nbsp:±"
+vim.opt.listchars = "eol:↵,tab:»·,trail:·,extends:→,precedes:←,nbsp:±"
 vim.opt.list = true
 
 -- Folding
