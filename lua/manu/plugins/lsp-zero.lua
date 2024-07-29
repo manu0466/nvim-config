@@ -114,30 +114,6 @@ return {
                 info = "I",
             })
 
-            -- Auto format on save
-            local formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-            local init_format_on_save = function(client, bufnr)
-                if client.supports_method("textDocument/formatting") then
-                    vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
-                    vim.api.nvim_create_autocmd("BufWritePre", {
-                        group = formatting_augroup,
-                        buffer = bufnr,
-                        callback = function()
-                            vim.lsp.buf.format({ async = false })
-                        end,
-                    })
-                elseif client.name == "bashls" then
-                    vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
-                    vim.api.nvim_create_autocmd("BufWritePre", {
-                        group = formatting_augroup,
-                        buffer = bufnr,
-                        callback = function()
-                            require("shfmt").formatting()
-                        end,
-                    })
-                end
-            end
-
             lsp_zero.on_attach(function(client, bufnr)
                 local opts = function(desc)
                     return { buffer = bufnr, remap = false, desc = desc }
@@ -200,23 +176,32 @@ return {
                 end, opts("LSP: Format Text"))
             end)
 
+            -- Auto format on save
+            -- don't add this function in the `on_attach` callback.
+            -- `format_on_save` should run only once, before the language servers are active.
+            lsp_zero.format_on_save({
+                format_opts = {
+                    async = false,
+                    timeout_ms = 10000,
+                },
+                servers = {
+                    ['tsserver'] = { 'javascript', 'typescript' },
+                    ['rust_analyzer'] = { 'rust' },
+                    ['gopls'] = { 'go' },
+                    ['lua_ls'] = { 'lua' },
+                    ['bashls'] = { 'bash' },
+                }
+            })
+
             -- Automatic language server config
             local lspconfig = require("lspconfig")
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'tsserver', 'rust_analyzer', 'gopls', 'lua_ls' },
+                ensure_installed = { 'tsserver', 'rust_analyzer', 'gopls', 'lua_ls', 'bashls' },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
                         local lua_opts = lsp_zero.nvim_lua_ls()
-                        local original_on_attach = lua_opts.on_attach
-                        lua_opts.on_attach = function(client, bufnr)
-                            init_format_on_save(client, bufnr)
-                            if original_on_attach then
-                                original_on_attach(client, bufnr)
-                            end
-                        end
-
                         lspconfig.lua_ls.setup(lua_opts)
                     end,
                     tsserver = function()
@@ -258,9 +243,7 @@ return {
                                 },
                             },
                             on_attach = function(_, bufnr)
-                                vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
                                 vim.api.nvim_create_autocmd("BufWritePre", {
-                                    group = formatting_augroup,
                                     buffer = bufnr,
                                     callback = function()
                                         vim.cmd("EslintFixAll")
@@ -285,15 +268,11 @@ return {
                                             "cargo",
                                             "clippy",
                                             "--all-targets",
-                                            "--all-features",
                                             "--message-format=json",
                                         }
                                     }
                                 },
                             },
-                            on_attach = function(client, bufnr)
-                                init_format_on_save(client, bufnr)
-                            end,
                         })
                     end,
                     gopls = function()
@@ -311,12 +290,8 @@ return {
                                 },
                             },
                             on_attach = function(client, bufnr)
-                                vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
-                                init_format_on_save(client, bufnr)
                                 vim.api.nvim_create_autocmd('BufWritePre', {
-                                    group = formatting_augroup,
                                     buffer = bufnr,
-                                    pattern = '*.go',
                                     callback = function()
                                         vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
                                     end
@@ -326,8 +301,15 @@ return {
                     end,
                     bashls = function()
                         lspconfig.bashls.setup({
-                            on_attach = function(client, bufnr)
-                                init_format_on_save(client, bufnr)
+                            cmd = { "bash-language-server", "start" },
+                            filetypes = { "sh" },
+                            on_attach = function(_, bufnr)
+                                vim.api.nvim_create_autocmd("BufWritePre", {
+                                    buffer = bufnr,
+                                    callback = function()
+                                        require("shfmt").formatting()
+                                    end,
+                                })
                             end,
                         })
                     end,
