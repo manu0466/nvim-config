@@ -190,6 +190,7 @@ return {
                     ['gopls'] = { 'go' },
                     ['lua_ls'] = { 'lua' },
                     ['bashls'] = { 'bash' },
+                    ['bufls'] = { 'proto' },
                 }
             })
 
@@ -313,6 +314,16 @@ return {
                             end,
                         })
                     end,
+                    bufls = function()
+                        local util = require "lspconfig/util"
+                        lspconfig.bufls.setup({
+                            cmd = { 'bufls', 'serve' },
+                            filetypes = { 'proto' },
+                            root_dir = function(fname)
+                                return util.root_pattern('buf.work.yaml', '.git')(fname)
+                            end,
+                        })
+                    end
                 }
             })
 
