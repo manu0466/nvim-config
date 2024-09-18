@@ -58,12 +58,13 @@ return {
             cmp.setup({
                 formatting = cmp_format,
                 sources = {
-                    { name = "nvim_lsp" },
-                    { name = "buffer" },
-                    { name = "path" },
-                    { name = "luasnip" },
+                    { name = "luasnip",  priority = 101 },
+                    { name = "nvim_lsp", priority = 100 },
+                    { name = "path",     priority = 90 },
+                    { name = "codeium",  priority = 80 },
                     {
                         name = 'spell',
+                        priority = 70,
                         option = {
                             keep_all_entries = false,
                             enable_in_context = function()
@@ -71,6 +72,7 @@ return {
                             end,
                         },
                     },
+                    { name = "buffer", priority = 0 },
                 },
                 snippet = {
                     expand = function(args)
