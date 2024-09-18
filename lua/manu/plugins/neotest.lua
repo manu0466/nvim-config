@@ -8,7 +8,8 @@ return {
 
         -- Test runners
         "nvim-neotest/neotest-jest",
-        "rouge8/neotest-rust"
+        "rouge8/neotest-rust",
+        "fredrikaverpil/neotest-golang"
     },
     config = function()
         require('neotest').setup({
@@ -37,6 +38,8 @@ return {
                 require("neotest-rust") {
                     dap_adapter = "codelldb",
                 },
+                -- Golang adapter
+                require("neotest-golang"),
             }
         })
     end,
