@@ -185,7 +185,7 @@ return {
                     timeout_ms = 10000,
                 },
                 servers = {
-                    ['tsserver'] = { 'javascript', 'typescript' },
+                    ['ts_ls'] = { 'javascript', 'typescript' },
                     ['rust_analyzer'] = { 'rust' },
                     ['gopls'] = { 'go' },
                     ['lua_ls'] = { 'lua' },
@@ -198,15 +198,15 @@ return {
             local lspconfig = require("lspconfig")
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'tsserver', 'rust_analyzer', 'gopls', 'lua_ls', 'bashls' },
+                ensure_installed = { 'ts_ls', 'rust_analyzer', 'gopls', 'lua_ls', 'bashls' },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
                         local lua_opts = lsp_zero.nvim_lua_ls()
                         lspconfig.lua_ls.setup(lua_opts)
                     end,
-                    tsserver = function()
-                        lspconfig.tsserver.setup({})
+                    ts_ls = function()
+                        lspconfig.ts_ls.setup({})
                     end,
                     eslint = function()
                         lspconfig.eslint.setup({
