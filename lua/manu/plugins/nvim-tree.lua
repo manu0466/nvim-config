@@ -269,7 +269,8 @@ return {
         })
     end,
     keys = {
-        { "<C-n>",     "<cmd>NvimTreeToggle<CR>", desc = "Open nvim-tree" },
-        { "<leader>e", "<cmd>NvimTreeFocus<CR>",  desc = "Focus nvim-tree" },
+        { "<C-n>",      "<cmd>NvimTreeToggle<CR>",   desc = "Open nvim-tree" },
+        { "<leader>e",  "<cmd>NvimTreeFocus<CR>",    desc = "Focus nvim-tree" },
+        { "<leader>fF", "<cmd>NvimTreeFindFile<CR>", desc = "Focus nvim-tree" },
     },
 }
