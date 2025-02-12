@@ -38,3 +38,12 @@ testnet
 tx
 validator
 middleware
+restake
+delegators
+whitelisted
+struct
+denom
+restakable
+denoms
+package
+blockchain
