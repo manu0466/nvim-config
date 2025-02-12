@@ -51,6 +51,11 @@ return {
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
             }
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            cmp.event:on(
+                'confirm_done',
+                cmp_autopairs.on_confirm_done()
+            )
 
             -- snippets
             require("luasnip.loaders.from_vscode").lazy_load()
@@ -200,7 +205,7 @@ return {
             local lspconfig = require("lspconfig")
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'ts_ls', 'rust_analyzer', 'gopls', 'lua_ls', 'bashls' },
+                ensure_installed = { 'ts_ls', 'rust_analyzer', 'gopls', 'lua_ls' },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
