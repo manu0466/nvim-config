@@ -1,2 +1,5 @@
 # Ignore lazy-lock
 lazy-lock.json
+
+# Ignore secrets
+.secrets

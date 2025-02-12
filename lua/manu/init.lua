@@ -1,6 +1,11 @@
 require("manu.set")
 require("manu.remap")
 
+-- Load secrets
+
+local secrets = require("helper.secrets")
+secrets.load_secrets()
+
 -- Initialize lazy
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
