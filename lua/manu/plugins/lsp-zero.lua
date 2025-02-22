@@ -275,8 +275,11 @@ return {
                                         overrideCommand = {
                                             "cargo",
                                             "clippy",
-                                            "--all-targets",
+                                            "--lib",
                                             "--message-format=json",
+                                            "--",
+                                            "-W", "clippy::all",
+                                            "-W", "clippy::pedantic",
                                         }
                                     }
                                 },
