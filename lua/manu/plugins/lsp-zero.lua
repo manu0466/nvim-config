@@ -343,7 +343,10 @@ return {
                                 return util.root_pattern('buf.work.yaml', '.git')(fname)
                             end,
                         })
-                    end
+                    end,
+                    tailwindcss = function()
+                        lspconfig.tailwindcss.setup({})
+                    end,
                 }
             })
 
