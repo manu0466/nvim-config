@@ -1,5 +1,6 @@
 require("manu.set")
 require("manu.remap")
+require("manu.indentation")
 
 -- Load secrets
 
