@@ -17,6 +17,8 @@ local lsps = {
     "rust_analyzer",
     -- Arduino
     "arduino_language_server",
+    -- Solidity
+    "solidity_ls_nomicfoundation",
 }
 
 -- Enable configured lsp servers
