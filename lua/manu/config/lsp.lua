@@ -11,6 +11,8 @@ local lsps = {
     -- PHP
     "phpactor",
     "laravel_ls",
+    -- Python
+    "pylsp",
     -- Golang
     "gopls",
     -- Rust
