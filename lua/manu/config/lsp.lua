@@ -21,6 +21,11 @@ local lsps = {
     "arduino_language_server",
     -- Solidity
     "solidity_ls_nomicfoundation",
+
+    -- Markdown
+    "marksman",
+    -- Yaml
+    "yamlls",
 }
 
 -- Enable configured lsp servers
