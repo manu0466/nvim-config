@@ -52,3 +52,5 @@ whitelist
 unbonding
 api
 decrypt
+metadata
+Globals
