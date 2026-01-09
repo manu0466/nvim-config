@@ -9,7 +9,7 @@ local lsps = {
     -- LUA
     "lua_ls",
     -- PHP
-    "phpactor",
+    "intelephense",
     "laravel_ls",
     -- Python
     "pylsp",
