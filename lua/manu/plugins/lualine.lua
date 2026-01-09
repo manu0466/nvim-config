@@ -27,7 +27,7 @@ return {
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 lualine_c = { 'filename' },
                 lualine_x = { "" },
-                lualine_y = { 'filetype', 'encoding', 'fileformat' },
+                lualine_y = { 'filetype', 'lsp_status' },
                 lualine_z = { 'location' }
             },
             inactive_sections = {
