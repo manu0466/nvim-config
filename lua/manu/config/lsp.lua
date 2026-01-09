@@ -21,6 +21,8 @@ local lsps = {
     "arduino_language_server",
     -- Solidity
     "solidity_ls_nomicfoundation",
+    -- Dart
+    "dartls",
 
     -- Markdown
     "marksman",
