@@ -1,9 +1,16 @@
 return {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
-    config = function()
-        require("nvim-tree").setup()
-    end,
+    opts = {
+        view = {
+            number = true,
+            relativenumber = true,
+            width = {
+                min = 30,
+                max = -1,
+            }
+        }
+    },
     keys = {
         { "<C-n>",      "<cmd>NvimTreeToggle<CR>",   desc = "Open nvim-tree" },
         { "<leader>e",  "<cmd>NvimTreeFocus<CR>",    desc = "Focus nvim-tree" },
