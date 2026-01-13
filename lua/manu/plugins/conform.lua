@@ -4,18 +4,35 @@ return {
     cmd = { "ConformInfo" },
     config = function()
         local conform = require("conform")
-
         conform.setup({
             formatters_by_ft = {
                 sql = { "sqlfmt" },
                 json = { "jq" },
                 sh = { "shfmt" },
+                php = { "ddev_pint" },
             },
             format_on_save = {
                 lsp_fallback = true,
-                async = false,
+                async        = false,
+                timeout_ms   = 5000,
             },
-
+            formatters = {
+                ddev_pint = {
+                    command     = "ddev",
+                    args        = { "pint", "--silent", "$RELATIVE_FILEPATH" },
+                    stdin       = false,
+                    -- A function that calculates the directory to run the command in
+                    cwd         = require("conform.util").root_file({ "pint.json" }),
+                    -- When cwd is not found, don't run the formatter (default false)
+                    require_cwd = true,
+                    condition   = function(self, ctx)
+                        -- ctx.cwd is the project root (Conform’s run cwd)
+                        local target = self.cwd(self, ctx) .. "/.ddev/commands/web/pint"
+                        return vim.uv.fs_stat(target) ~= nil
+                    end,
+                    timeout_ms  = 5000,
+                },
+            }
         })
     end,
     keys = {
