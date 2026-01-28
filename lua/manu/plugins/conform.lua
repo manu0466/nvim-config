@@ -26,8 +26,12 @@ return {
                     -- When cwd is not found, don't run the formatter (default false)
                     require_cwd = true,
                     condition   = function(self, ctx)
+                        cwd = self.cwd(self, ctx)
+                        if cwd == nil then
+                            return false
+                        end
                         -- ctx.cwd is the project root (Conform’s run cwd)
-                        local target = self.cwd(self, ctx) .. "/.ddev/commands/web/pint"
+                        local target = cwd .. "/.ddev/commands/web/pint"
                         return vim.uv.fs_stat(target) ~= nil
                     end,
                     timeout_ms  = 5000,
