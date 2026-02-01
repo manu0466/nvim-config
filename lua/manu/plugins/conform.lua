@@ -10,6 +10,7 @@ return {
                 json = { "jq" },
                 sh = { "shfmt" },
                 php = { "ddev_pint" },
+                nix = { "nixfmt" },
             },
             format_on_save = {
                 lsp_fallback = true,
