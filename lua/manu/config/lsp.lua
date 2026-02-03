@@ -23,6 +23,8 @@ local lsps = {
     "solidity_ls_nomicfoundation",
     -- Dart
     "dartls",
+    -- Nix
+    "nil_ls",
 
     -- Markdown
     "marksman",
