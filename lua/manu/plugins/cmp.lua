@@ -1,17 +1,22 @@
 return {
     'saghen/blink.cmp',
     dependencies = {
+        {
+            'saghen/blink.compat',
+            version = '2.*',
+            lazy = false,
+            opts = {
+                impersonate_nvim_cmp = true,
+            },
+        },
         'rafamadriz/friendly-snippets',
         {
             'supermaven-inc/supermaven-nvim',
             opts = {
                 disable_inline_completion = true,
                 disable_keymaps = true,
-                -- Disbable log for having inline completion without cmp
-                log_level = "off"
             },
         },
-        'huijiro/blink-cmp-supermaven'
     },
     version = '1.*',
     opts = {
@@ -37,14 +42,13 @@ return {
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
+            default = { 'supermaven', 'lsp', 'path', 'snippets', 'buffer' },
             providers = {
                 supermaven = {
-                    name = 'supermaven',
-                    module = "blink-cmp-supermaven",
-                    async = true
+                    name = "supermaven",
+                    module = "blink.compat.source",
                 },
             },
-            default = { 'supermaven', 'lsp', 'path', 'snippets', 'buffer' },
             per_filetype = {
                 DressingInput = {}, -- disable autocomplete for NvimTree
             },
