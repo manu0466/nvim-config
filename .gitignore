@@ -3,3 +3,6 @@ lazy-lock.json
 
 # Ignore secrets
 .secrets
+
+# Ignore 99 temp dir
+/.99
