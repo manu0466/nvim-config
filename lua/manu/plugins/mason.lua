@@ -21,8 +21,6 @@ return {
             "rust-analyzer",
             -- Arduino
             "arduino-language-server",
-            -- Solidity
-            "nomicfoundation-solidity-language-server",
             -- Markdown
             "marksman",
             -- Yaml
