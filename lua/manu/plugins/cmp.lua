@@ -1,5 +1,6 @@
 return {
     'saghen/blink.cmp',
+    lazy = false,
     dependencies = {
         {
             'saghen/blink.compat',
