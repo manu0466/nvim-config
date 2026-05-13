@@ -5,8 +5,12 @@ require("manu.remap")
 local secrets = require("helper.secrets")
 secrets.load_secrets()
 
--- Initialize lazy
+-- Fix table unpack
+if not table.unpack then
+    table.unpack = unpack
+end
 
+-- Initialize lazy
 local lazyPath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazyPath) then
     vim.fn.system({
