@@ -17,7 +17,8 @@ return {
             'php',
             'latex',
             'javascript', 'typescript', 'html', 'css',
-            'json', 'yaml'
+            'json', 'yaml',
+            'gitignore',
         }
         treesitter.install(filetypes)
 
