@@ -15,6 +15,7 @@ return {
             'lua',
             'rust',
             'php',
+            'blade',
             'latex',
             'javascript', 'typescript', 'html', 'css',
             'json', 'yaml',
