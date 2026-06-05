@@ -20,6 +20,7 @@ return {
             'javascript', 'typescript', 'html', 'css',
             'json', 'yaml',
             'gitignore',
+            'go', 'gomod',
         }
         treesitter.install(filetypes)
 
