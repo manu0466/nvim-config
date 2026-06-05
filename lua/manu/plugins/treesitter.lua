@@ -27,6 +27,8 @@ return {
             callback = function()
                 -- syntax highlighting, provided by Neovim
                 vim.treesitter.start()
+                -- treesitter based indentation
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end,
         })
     end
