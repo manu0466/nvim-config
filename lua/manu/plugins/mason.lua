@@ -15,6 +15,7 @@ return {
             "laravel-ls",
             -- nix
             "nil",
+            "nixfmt",
             -- Python
             "python-lsp-server",
             -- Golang
