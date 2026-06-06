@@ -13,6 +13,8 @@ return {
             -- PHP
             "phpactor",
             "laravel-ls",
+            -- nix
+            "nil",
             -- Python
             "python-lsp-server",
             -- Golang
