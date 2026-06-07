@@ -26,6 +26,9 @@ return {
             "arduino-language-server",
             -- Markdown
             "marksman",
+            -- Latex
+            "digestif",
+            "latexindent",
             -- Yaml
             "yaml-language-server",
 

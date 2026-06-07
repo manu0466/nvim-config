@@ -11,6 +11,7 @@ return {
                 sh = { "shfmt" },
                 php = { "ddev_pint" },
                 nix = { "nixfmt" },
+                tex = { "latexindent" },
             },
             format_on_save = {
                 lsp_fallback = true,

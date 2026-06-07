@@ -30,6 +30,8 @@ local lsps = {
     "marksman",
     -- Yaml
     "yamlls",
+    -- LaTeX
+    "digestif",
 }
 
 -- Enable configured lsp servers
