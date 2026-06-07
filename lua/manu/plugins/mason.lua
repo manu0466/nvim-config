@@ -31,8 +31,9 @@ return {
             "latexindent",
             -- Yaml
             "yaml-language-server",
-
+            -- Bash
             "shfmt",
+            -- SQL
             "sqlfmt",
         }
     },
