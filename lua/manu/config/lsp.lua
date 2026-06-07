@@ -63,11 +63,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, opts("LSP: Show Diagnostics"))
 
         vim.keymap.set("n", "]d", function()
-            vim.diagnostic.goto_next()
+            vim.diagnostic.jump({ count = 1 })
         end, opts("LSP: Next Diagnostic"))
 
         vim.keymap.set("n", "[d", function()
-            vim.diagnostic.goto_prev()
+            vim.diagnostic.jump({ count = -1 })
         end, opts("LSP: Prev Diagnostic"))
 
         vim.keymap.set("n", "<leader>vrr", function()
