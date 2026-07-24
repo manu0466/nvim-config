@@ -21,6 +21,7 @@ return {
             'json', 'yaml',
             'gitignore',
             'go', 'gomod',
+            'python',
             'nix'
         }
         treesitter.install(filetypes)
