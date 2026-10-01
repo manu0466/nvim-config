@@ -6,8 +6,8 @@ return {
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
     },
-    cmd = "TroubleToggle",
+    cmd = "Trouble",
     keys = {
-        { "<leader>vD", "<cmd>TroubleToggle<cr>", desc = "Diagnostic Summary" },
+        { "<leader>vD", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagnostic Summary" },
     }
 }
