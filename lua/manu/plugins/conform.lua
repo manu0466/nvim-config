@@ -9,7 +9,7 @@ return {
                 sql = { "sqlfmt" },
                 json = { "jq" },
                 sh = { "shfmt" },
-                php = { "ddev_pint" },
+                php = { "pint_vendor", "php-cs-fixer" },
                 nix = { "nixfmt" },
                 tex = { "latexindent" },
             },
@@ -19,24 +19,31 @@ return {
                 timeout_ms   = 5000,
             },
             formatters = {
-                ddev_pint = {
-                    command     = "ddev",
-                    args        = { "pint", "--silent", "$RELATIVE_FILEPATH" },
-                    stdin       = false,
-                    -- A function that calculates the directory to run the command in
-                    cwd         = require("conform.util").root_file({ "pint.json" }),
-                    -- When cwd is not found, don't run the formatter (default false)
-                    require_cwd = true,
-                    condition   = function(self, ctx)
-                        cwd = self.cwd(self, ctx)
-                        if cwd == nil then
-                            return false
+                pint_vendor = {
+                    command = function(_, ctx)
+                        -- Find project root by looking for composer.json
+                        local root_list = vim.fs.find("composer.json", { path = ctx.filename, upward = true })
+                        local root_file = root_list[1]
+                        if not root_file then
+                            return nil -- no composer.json found → disable this formatter
                         end
-                        -- ctx.cwd is the project root (Conform’s run cwd)
-                        local target = cwd .. "/.ddev/commands/web/pint"
-                        return vim.uv.fs_stat(target) ~= nil
+
+                        -- Get the directory containing composer.json
+                        local project_root = vim.fs.dirname(root_file)
+                        if not project_root then
+                            return nil
+                        end
+
+                        local pint_path = vim.fs.joinpath(project_root, "vendor", "bin", "pint")
+                        -- Ensure pint_path is a string before calling executable()
+                        if type(pint_path) == "string" and vim.fn.executable(pint_path) == 1 then
+                            return pint_path
+                        else
+                            return nil
+                        end
                     end,
-                    timeout_ms  = 5000,
+                    args = { "$FILENAME" },
+                    stdin = false,
                 },
             }
         })
