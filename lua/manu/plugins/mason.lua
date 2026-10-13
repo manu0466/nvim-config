@@ -11,8 +11,8 @@ return {
             -- LUA
             "lua-language-server",
             -- PHP
-            "phpactor",
-            "laravel-ls",
+            "phpantom_lsp",
+            "laravel_lsp",
             -- nix
             "nil",
             "nixfmt",
