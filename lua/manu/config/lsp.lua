@@ -11,6 +11,9 @@ local lsps = {
     -- PHP
     "phpantom_lsp",
     "laravel_ls",
+    -- Typescrypt/javascrypt
+    "tsc",
+    "eslint",
     -- Python
     "pylsp",
     -- Golang
